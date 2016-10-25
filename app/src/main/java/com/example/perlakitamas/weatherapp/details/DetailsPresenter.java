@@ -2,10 +2,14 @@ package com.example.perlakitamas.weatherapp.details;
 
 import com.crashlytics.android.Crashlytics;
 import com.example.perlakitamas.weatherapp.weather.bean.WeatherData;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.Serializable;
+import java.io.StringReader;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,15 +37,18 @@ public class DetailsPresenter implements Serializable {
         openWeatherApi.getWeatherData(city).enqueue(new Callback<WeatherData>() {
             @Override
             public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
-                weatherData = response.body();
-                EventBus.getDefault().post(new WeatherLoadedEvent(response.body()));
+                if(response.body() != null) {
+                    weatherData = response.body();
+                    EventBus.getDefault().post(new WeatherLoadedEvent(response.body()));
+                } else if(response.errorBody() != null) {
+                    EventBus.getDefault().post(new WeatherLoadingFailedEvent("City not found!"));
+                }
             }
 
             @Override
             public void onFailure(Call<WeatherData> call, Throwable t) {
                 Crashlytics.logException(t);
-
-                // TODO show error message
+                EventBus.getDefault().post(new WeatherLoadingFailedEvent("An error happened while getting the weather data"));
             }
         });
     }
@@ -59,14 +66,6 @@ public class DetailsPresenter implements Serializable {
         return weatherData;
     }
 
-    //    public void attachView(DetailsScreen screen) {
-//        this.screen = screen;
-//    }
-//
-//    public void detachView() {
-//        this.screen = null;
-//    }
-
     public static class WeatherLoadedEvent {
         private WeatherData weatherData;
 
@@ -76,6 +75,18 @@ public class DetailsPresenter implements Serializable {
 
         public WeatherData getWeatherData() {
             return weatherData;
+        }
+    }
+
+    public static class WeatherLoadingFailedEvent {
+        private String message;
+
+        public WeatherLoadingFailedEvent(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
         }
     }
 }

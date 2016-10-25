@@ -32,7 +32,7 @@ public class MoreDetailsFragment extends DetailsFragmentBase {
             return;
         }
 
-        Date date = new Date(weatherData.getDt().longValue());
+        Date date = new Date(weatherData.getDt().longValue() * 1000);
         DateFormat dateFormat = new SimpleDateFormat("yyyy. MM. dd. HH:mm");
         TextView dateTextView = (TextView) rootView.findViewById(R.id.date);
         dateTextView.setText(dateFormat.format(date));

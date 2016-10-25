@@ -1,7 +1,9 @@
 package com.example.perlakitamas.weatherapp.details;
 
 import android.content.Intent;
+import android.icu.text.IDNA;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -13,7 +15,12 @@ import android.os.Bundle;
 import android.view.Menu;
 
 import com.example.perlakitamas.weatherapp.R;
+import com.example.perlakitamas.weatherapp.main.AddCityDialogFragment;
 import com.example.perlakitamas.weatherapp.main.MainActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class DetailsActivity extends AppCompatActivity implements DetailsScreen {
 
@@ -64,10 +71,35 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_details, menu);
         return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onWeatherLoadingFailed(DetailsPresenter.WeatherLoadingFailedEvent weatherLoadingFailedEvent) {
+        FragmentManager fm = getSupportFragmentManager();
+        ErrorDialogFragment errorDialogFragment = new ErrorDialogFragment();
+        errorDialogFragment.setStyle(DialogFragment.STYLE_NORMAL, 0);
+
+        Bundle args = new Bundle();
+        args.putString(ErrorDialogFragment.MESSAGE_PARAM, weatherLoadingFailedEvent.getMessage());
+        errorDialogFragment.setArguments(args);
+
+        errorDialogFragment.show(fm, "error");
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
