@@ -1,8 +1,9 @@
-package com.example.perlakitamas.weatherapp;
+package com.example.perlakitamas.weatherapp.main;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
+import com.example.perlakitamas.weatherapp.details.DetailsActivity;
+import com.example.perlakitamas.weatherapp.R;
+
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity
@@ -108,6 +112,7 @@ public class MainActivity extends AppCompatActivity
     private void openAddCityDialog() {
         FragmentManager fm = getSupportFragmentManager();
         AddCityDialogFragment addCityDialogFragment = new AddCityDialogFragment();
+        addCityDialogFragment.setStyle(DialogFragment.STYLE_NORMAL, 0);
         addCityDialogFragment.show(fm, "add_city");
     }
 }

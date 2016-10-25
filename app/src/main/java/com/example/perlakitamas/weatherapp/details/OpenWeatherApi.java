@@ -1,4 +1,4 @@
-package com.example.perlakitamas.weatherapp;
+package com.example.perlakitamas.weatherapp.details;
 
 
 

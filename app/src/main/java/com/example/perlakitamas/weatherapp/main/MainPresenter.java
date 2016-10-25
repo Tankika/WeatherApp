@@ -1,7 +1,4 @@
-package com.example.perlakitamas.weatherapp;
-
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
+package com.example.perlakitamas.weatherapp.main;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,7 +34,9 @@ public class MainPresenter {
     }
 
     public void addCity(String city) {
-        cityList.add(city);
+        if(!cityList.contains(city) && !city.isEmpty() ) {
+            cityList.add(city);
+        }
     }
 
     public void removeCity(String city) { cityList.remove(city); }

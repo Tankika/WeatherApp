@@ -4,6 +4,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="city">City: %1$s</string>
-    <string name="current_temperature">Current temperature: %1$s</string>
-    <string name="description">Description: %1$s</string>
+    <string name="current_temperature">Current temperature: %1$s degrees</string>
+    <string name="description">Description: %1$s degrees</string>
+    <string name="minimum_temperature">Minimum temperature: %1$.1f degrees</string>
+    <string name="maximum_temperature">Maximum temperature: %1$.1f degrees</string>
+    <string name="pressure">Pressure: %1$.1f hPa</string>
+    <string name="humidity">Humidity: %1$d%%</string>
 </resources>

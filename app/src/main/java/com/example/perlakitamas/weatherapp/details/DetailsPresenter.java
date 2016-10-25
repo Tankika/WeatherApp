@@ -1,4 +1,4 @@
-package com.example.perlakitamas.weatherapp;
+package com.example.perlakitamas.weatherapp.details;
 
 import com.crashlytics.android.Crashlytics;
 import com.example.perlakitamas.weatherapp.weather.bean.WeatherData;
@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DetailsPresenter implements Serializable {
 
-    private DetailsActivity.MainInfoFragment fragment;
+    private MainDetailsFragment fragment;
 
     private static String city;
     private static DetailsPresenter instance = null;
