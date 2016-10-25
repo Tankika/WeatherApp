@@ -21,6 +21,10 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ed8466278c8e95a0cceef086894b7dd6808152f8" />
+        <activity
+            android:name=".DetailsActivity"
+            android:label="@string/title_activity_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

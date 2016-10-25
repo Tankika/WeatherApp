@@ -40,7 +40,14 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
     testCompile 'junit:junit:4.12'
     compile('com.crashlytics.sdk.android:crashlytics:2.6.4@aar') {
         transitive = true;
